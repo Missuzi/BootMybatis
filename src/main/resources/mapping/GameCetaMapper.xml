@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lol.mapper.GameCetaMapper" >
+  <resultMap id="BaseResultMap" type="com.lol.po.GameCeta" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gameid" property="gameid" jdbcType="BIGINT" />
+    <result column="gamename" property="gamename" jdbcType="VARCHAR" />
+    <result column="gamedesc" property="gamedesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, gameid, gamename, gamedesc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from game
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from game
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lol.po.GameCeta" >
+    insert into game (id, gameid, gamename, 
+      gamedesc)
+    values (#{id,jdbcType=BIGINT}, #{gameid,jdbcType=BIGINT}, #{gamename,jdbcType=VARCHAR}, 
+      #{gamedesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lol.po.GameCeta" >
+    insert into game
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="gamename != null" >
+        gamename,
+      </if>
+      <if test="gamedesc != null" >
+        gamedesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=BIGINT},
+      </if>
+      <if test="gamename != null" >
+        #{gamename,jdbcType=VARCHAR},
+      </if>
+      <if test="gamedesc != null" >
+        #{gamedesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lol.po.GameCeta" >
+    update game
+    <set >
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=BIGINT},
+      </if>
+      <if test="gamename != null" >
+        gamename = #{gamename,jdbcType=VARCHAR},
+      </if>
+      <if test="gamedesc != null" >
+        gamedesc = #{gamedesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lol.po.GameCeta" >
+    update game
+    set gameid = #{gameid,jdbcType=BIGINT},
+      gamename = #{gamename,jdbcType=VARCHAR},
+      gamedesc = #{gamedesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

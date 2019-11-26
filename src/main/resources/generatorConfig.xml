@@ -41,6 +41,7 @@
         </javaClientGenerator>
 
         <!-- 相关表的配置 -->
+        <!--
         <table tableName="dept" domainObjectName="Dept"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false"/>
@@ -48,5 +49,9 @@
         <table tableName="users" domainObjectName="User"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false"/>
+               -->
+        <table tableName="game" domainObjectName="GameCeta"
+        enableCountByExample="false" enableDeleteByExample="false"
+        enableSelectByExample="false" enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>
