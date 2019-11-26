@@ -1,6 +1,7 @@
 package com.lol.Controller;
 
 import com.lol.Service.UserService;
+import com.lol.common.Result;
 import com.lol.po.DeptInfoList;
 import com.lol.po.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,28 @@ public class UserController {
 
 
     @RequestMapping("/searchMyValue")
-    public List<DeptInfoList> searchMyValue(Integer DeptId )
+    public Result searchMyValue(Integer DeptId )
     {
-        return  userService.searchMyEvaluate(DeptId);
+        List<DeptInfoList> lists=  userService.searchMyEvaluate(DeptId);
+        if (lists.size()>0)
+        {
+            return  Result.success(lists);
+        }
+        else
+            return  Result.fail("无关联部门数据");
 
     }
 
     @RequestMapping("/selectByPrimaryKey")
-    public  User selectByPrimaryKey(Integer id)
+    public  Result selectByPrimaryKey(Integer id)
     {
-        return  userService.selectByPrimaryKey(id);
+        User user=  userService.selectByPrimaryKey(id);
+        if(user!=null){
+            return  Result.success(user);
+        }
+        else
+            return  Result.fail("无数据！");
+
 
     }
 

@@ -1,5 +1,6 @@
 package com.lol.mapper;
 
+
 import com.lol.po.GameCeta;
 
 public interface GameCetaMapper {
