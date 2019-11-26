@@ -3,7 +3,7 @@ package com.lol.po;
 public class GameCeta {
     private Long id;
 
-    private Long gameid;
+    private String gameid;
 
     private String gamename;
 
@@ -17,12 +17,12 @@ public class GameCeta {
         this.id = id;
     }
 
-    public Long getGameid() {
+    public String getGameid() {
         return gameid;
     }
 
-    public void setGameid(Long gameid) {
-        this.gameid = gameid;
+    public void setGameid(String gameid) {
+        this.gameid = gameid == null ? null : gameid.trim();
     }
 
     public String getGamename() {
