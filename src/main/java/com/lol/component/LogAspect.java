@@ -1,6 +1,9 @@
 package com.lol.component;
 
+
 import com.lol.common.Result;
+import com.lol.po.DeptInfoList;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -11,6 +14,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Aspect
 @Component
@@ -24,26 +29,28 @@ public class LogAspect {
     }
 
     @Around("log()&&args(arg)")
-    public Result doAround(ProceedingJoinPoint proceedingJoinPoint, Long arg) throws Throwable {
-        Result result=new Result() ;
+    public Result doAround(ProceedingJoinPoint proceedingJoinPoint, Object arg) throws Throwable {
+        Result result;
         try {
             System.out.println("方法环绕start...around");
             result= (Result) proceedingJoinPoint.proceed();
-           // System.out.println(result);
-            LOGGER.info(result.toString());
+
+            List<DeptInfoList> deptInfoList= (List<DeptInfoList>)result.getData();
+           // List<DeptInfoList> objList=new ArrayList<>();
+            //Object obj= JSONChange.jsonToObj(objList,deptInfoList.toString());
+            LOGGER.info(deptInfoList.toString());
             LOGGER.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
             System.out.println("方法环绕end...around");
 
         } catch (Exception e) {
+
+
             e.printStackTrace();
             result=Result.fail(e.getMessage());
         }
         return  result;
 
     }
-
-
-
 
     @Before("log()")
     public void doBefore(JoinPoint joinPoint) {

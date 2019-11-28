@@ -1,7 +1,9 @@
 package com.lol.po;
 
 
-public class DeptInfoList {
+import java.io.Serializable;
+
+public class DeptInfoList implements Serializable {
 
     private String name;
 
@@ -48,5 +50,18 @@ public class DeptInfoList {
         this.age = age;
         this.deptId = deptId;
         this.deptDesc = deptDesc;
+    }
+
+    @Override
+    public String toString() {
+        return "DeptInfoList{" +
+                "name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                ", deptId=" + deptId +
+                ", deptDesc='" + deptDesc + '\'' +
+                '}';
+    }
+
+    public DeptInfoList() {
     }
 }
