@@ -29,11 +29,11 @@ public class Result<T> {
         this.data = data;
     }
 
-    protected Result() {
+    public Result() {
 
     }
 
-    protected Result(long code, String message, T data) {
+    public Result(long code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;

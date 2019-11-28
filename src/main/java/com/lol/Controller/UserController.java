@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.List;
+
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/testBoot")
@@ -21,6 +24,9 @@ public class UserController {
     public Result searchMyValue(Integer DeptId )
     {
         List<DeptInfoList> lists=  userService.searchMyEvaluate(DeptId);
+        //List<String> nameList=lists.stream().map(DeptInfoList::getDeptDesc).collect(Collectors.toList());
+       lists.forEach(i->i.setName("呵呵"));
+        //List<String> nameList=lists.stream().map(DeptInfoList-> DeptInfoList.getName()).collect(Collectors.toList());
         if (lists.size()>0)
         {
             return  Result.success(lists);
