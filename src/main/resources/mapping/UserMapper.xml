@@ -92,5 +92,6 @@
     left JOIN dept b
     on a.dept_id=b.dept_id
     where a.dept_id=#{id,jdbcType=INTEGER}
+    limit 1
   </select>
 </mapper>

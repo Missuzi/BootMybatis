@@ -1,13 +1,23 @@
 package com.lol.po;
 
+import com.lol.annotition.DateParse;
+
+import java.util.Date;
+
 public class GameCeta {
     private Long id;
 
-    private String gameid;
+    private String gameId;
 
-    private String gamename;
+    private String gameName;
 
-    private String gamedesc;
+    private String gameDesc;
+
+    @DateParse
+    private Date createDate;
+
+    @DateParse
+    private Date updateDate;
 
     public Long getId() {
         return id;
@@ -17,27 +27,55 @@ public class GameCeta {
         this.id = id;
     }
 
-    public String getGameid() {
-        return gameid;
+    public String getGameId() {
+        return gameId;
     }
 
-    public void setGameid(String gameid) {
-        this.gameid = gameid == null ? null : gameid.trim();
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 
-    public String getGamename() {
-        return gamename;
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setGamename(String gamename) {
-        this.gamename = gamename == null ? null : gamename.trim();
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
-    public String getGamedesc() {
-        return gamedesc;
+    public String getGameDesc() {
+        return gameDesc;
     }
 
-    public void setGamedesc(String gamedesc) {
-        this.gamedesc = gamedesc == null ? null : gamedesc.trim();
+    public void setGameDesc(String gameDesc) {
+        this.gameDesc = gameDesc;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    @Override
+    public String toString() {
+        return "GameCeta{" +
+                "id=" + id +
+                ", gameId='" + gameId + '\'' +
+                ", gameName='" + gameName + '\'' +
+                ", gameDesc='" + gameDesc + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                '}';
     }
 }

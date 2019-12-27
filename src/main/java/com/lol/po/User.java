@@ -9,6 +9,13 @@ public class User {
 
     private Long deptId;
 
+    public User(Integer id, String name, String age, Long deptId) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.deptId = deptId;
+    }
+
     public Integer getId() {
         return id;
     }

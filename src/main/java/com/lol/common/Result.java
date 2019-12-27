@@ -59,6 +59,7 @@ public class Result<T> {
 
     }
 
+
     public  static <T> Result<T> fail(){
         return  new Result<T>(ResultCode.FAILED.getCode(),ResultCode.FAILED.getMessage(),null);
 

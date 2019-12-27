@@ -18,4 +18,9 @@ public class DeptServiceImp implements DeptService {
         return  deptMapper.selectByPrimaryKey(id);
 
     }
+
+    @Override
+    public int updateByPrimaryKeySelective(Dept dept) {
+        return deptMapper.updateByPrimaryKeySelective(dept);
+    }
 }

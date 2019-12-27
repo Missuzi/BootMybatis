@@ -3,12 +3,14 @@
 <mapper namespace="com.lol.mapper.GameCetaMapper" >
   <resultMap id="BaseResultMap" type="com.lol.po.GameCeta" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
-    <result column="gamename" property="gamename" jdbcType="VARCHAR" />
-    <result column="gamedesc" property="gamedesc" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameId" jdbcType="VARCHAR" />
+    <result column="gamename" property="gameName" jdbcType="VARCHAR" />
+    <result column="gamedesc" property="gameDesc" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, gameid, gamename, gamedesc
+    id, gameid, gamename, gamedesc, create_date, update_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -16,15 +18,25 @@
     from game
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="getListGame" resultType="com.lol.po.GameCeta">
+    select
+    <include refid="Base_Column_List" />
+    from game
+    where gameid = #{gameId,jdbcType=VARCHAR}
+
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from game
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.lol.po.GameCeta" >
     insert into game (id, gameid, gamename, 
-      gamedesc)
+      gamedesc, create_date, update_date
+      )
     values (#{id,jdbcType=BIGINT}, #{gameid,jdbcType=VARCHAR}, #{gamename,jdbcType=VARCHAR}, 
-      #{gamedesc,jdbcType=VARCHAR})
+      #{gamedesc,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lol.po.GameCeta" >
     insert into game
@@ -41,6 +53,12 @@
       <if test="gamedesc != null" >
         gamedesc,
       </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -55,7 +73,22 @@
       <if test="gamedesc != null" >
         #{gamedesc,jdbcType=VARCHAR},
       </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
     </trim>
+  </insert>
+  <insert id="insertDepartments" useGeneratedKeys="true" keyProperty="id" parameterType="com.lol.po.GameCeta">
+  insert  into game(gameid,gamename,gamedesc)
+  values
+  <foreach collection="list" item="GameCeta" index="index" separator=",">
+    (#{GameCeta.gameId,jdbcType=VARCHAR}, #{GameCeta.gameName,jdbcType=VARCHAR},#{GameCeta.gameDesc,jdbcType=VARCHAR})
+  </foreach>
+
+
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.lol.po.GameCeta" >
     update game
@@ -69,6 +102,12 @@
       <if test="gamedesc != null" >
         gamedesc = #{gamedesc,jdbcType=VARCHAR},
       </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -76,7 +115,9 @@
     update game
     set gameid = #{gameid,jdbcType=VARCHAR},
       gamename = #{gamename,jdbcType=VARCHAR},
-      gamedesc = #{gamedesc,jdbcType=VARCHAR}
+      gamedesc = #{gamedesc,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -35,10 +35,10 @@ public class LogAspect {
             System.out.println("方法环绕start...around");
             result= (Result) proceedingJoinPoint.proceed();
 
-            List<DeptInfoList> deptInfoList= (List<DeptInfoList>)result.getData();
+           // List<DeptInfoList> deptInfoList= (List<DeptInfoList>)result.getData();
            // List<DeptInfoList> objList=new ArrayList<>();
             //Object obj= JSONChange.jsonToObj(objList,deptInfoList.toString());
-            LOGGER.info(deptInfoList.toString());
+           // LOGGER.info(deptInfoList.toString());
             LOGGER.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
             System.out.println("方法环绕end...around");
 

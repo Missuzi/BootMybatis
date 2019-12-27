@@ -26,10 +26,12 @@ public class UserController {
         List<DeptInfoList> lists=  userService.searchMyEvaluate(DeptId);
         //List<String> nameList=lists.stream().map(DeptInfoList::getDeptDesc).collect(Collectors.toList());
        lists.forEach(i->i.setName("呵呵"));
-        //List<String> nameList=lists.stream().map(DeptInfoList-> DeptInfoList.getName()).collect(Collectors.toList());
+
+       lists.forEach(k->k.setAge(k.getAge()+".0"));
+        List<String> nameList=lists.stream().map(DeptInfo-> DeptInfo.getAge()+".000").collect(Collectors.toList());
         if (lists.size()>0)
         {
-            return  Result.success(lists);
+            return  Result.success(nameList);
         }
         else
             return  Result.fail("无关联部门数据");
@@ -48,6 +50,8 @@ public class UserController {
 
 
     }
+
+
 
 
 }
